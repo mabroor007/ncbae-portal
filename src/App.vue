@@ -32,4 +32,10 @@ body {
   transform: scale(0.5);
   opacity: 0;
 }
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
 </style>
