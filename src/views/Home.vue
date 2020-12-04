@@ -1,18 +1,31 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="home win">
+    <Connecting :load="!state.dbConnected" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { reactive } from "vue";
+import Connecting from "@/components/Connecting";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
+  setup() {
+    const state = reactive({
+      dbConnected: false,
+    });
+    const setCon = () => {
+      state.dbConnected = true;
+    };
+    setTimeout(() => {
+      state.dbConnected = true;
+    }, 5000);
+    return {
+      state,
+      setCon,
+      Connecting,
+    };
+  },
 };
 </script>
+
+<style scoped></style>
