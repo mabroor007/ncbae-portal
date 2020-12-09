@@ -66,9 +66,11 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 img {
-  max-width: 250px;
+  width: 300px;
   margin-bottom: 1.7rem;
 }
 input {
@@ -77,10 +79,10 @@ input {
   border: none;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
   border-radius: 12px;
   outline: none;
   transition: all 0.3s;
+  font-family: "Poppinsm";
 }
 button {
   margin-left: auto;
@@ -94,9 +96,7 @@ button {
   cursor: pointer;
   transition: all 0.3s;
   outline: none;
-}
-input:focus {
-  background-color: #6dc9f7;
+  font-family: "Poppinsm";
 }
 
 button:hover {

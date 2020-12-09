@@ -22,10 +22,10 @@ body {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.3s;
+  transition: all 0.4s;
 }
 .slide-enter-from {
-  transform: scale(0.5);
+  transform: scale(0.7);
   opacity: 0;
 }
 .slide-leave-to {

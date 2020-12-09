@@ -3,20 +3,20 @@
     <h1 class="stats">Stats</h1>
     <div class="dataBox">
       <div class="entry">
-        <div class="title">Total Students</div>
-        <div class="value">{{ state.totalStudents }}</div>
+        <div class="title">Total Teachers</div>
+        <div class="value">{{ state.totalTeachers }}</div>
       </div>
       <div class="entry">
-        <div class="title">Regular Students</div>
-        <div class="value">{{ state.regularStudents }}</div>
+        <div class="title">Permanent Teachers</div>
+        <div class="value">{{ state.permanentTeachers }}</div>
       </div>
       <div class="entry">
-        <div class="title">Weekend Students</div>
-        <div class="value">{{ state.weekendStudents }}</div>
+        <div class="title">Visiting Teachers</div>
+        <div class="value">{{ state.visitingTeachers }}</div>
       </div>
     </div>
-    <div @click="$router.push({ name: 'AddStudent' })" class="add">
-      <div>Add Student</div>
+    <div @click="$router.push({ name: 'AddTeacher' })" class="add">
+      <div>Add Teacher</div>
     </div>
   </div>
 </template>
@@ -27,9 +27,9 @@ import { reactive } from "vue";
 export default {
   setup() {
     const state = reactive({
-      totalStudents: 0,
-      regularStudents: 0,
-      weekendStudents: 0,
+      totalTeachers: 0,
+      permanentTeachers: 0,
+      visitingTeachers: 0,
     });
 
     return {
@@ -52,11 +52,11 @@ h1 {
 .dataBox {
   width: 450px;
   height: 160px;
-  background: rgb(46, 155, 255);
+  background: rgb(52, 255, 97);
   background: linear-gradient(
     90deg,
-    rgba(46, 155, 255, 1) 0%,
-    rgba(86, 202, 237, 1) 100%
+    rgb(38, 226, 79) 0%,
+    rgba(28, 228, 120, 1) 100%
   );
   color: white;
   font-family: "Poppinsm";
@@ -79,11 +79,11 @@ div.add {
   height: 160px;
   border-radius: 10px;
   margin-top: 15px;
-  background: rgb(238, 166, 81);
+  background: rgb(56, 184, 255);
   background: linear-gradient(
     90deg,
-    rgba(238, 166, 81, 1) 0%,
-    rgb(235, 227, 9) 100%
+    rgba(56, 184, 255, 1) 0%,
+    rgba(9, 33, 255, 1) 100%
   );
   font-family: "Poppinsb";
   color: white;

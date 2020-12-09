@@ -1,19 +1,23 @@
 <template>
   <div class="main">
     <button
-      v-on:click="if (!props.stdIsActive) router.push({ name: 'Students' });"
+      v-on:click="
+        if (!props.stdIsActive) router.push({ name: 'StudentsHome' });
+      "
       v-bind:class="{ activeStd: props.stdIsActive }"
     >
       Students
     </button>
     <button
-      v-on:click="if (!props.tchIsActive) router.push({ name: 'Teachers' });"
+      v-on:click="
+        if (!props.tchIsActive) router.push({ name: 'TeachersHome' });
+      "
       v-bind:class="{ activeTch: props.tchIsActive }"
     >
       Teachers
     </button>
     <button
-      v-on:click="if (!props.crsIsActive) router.push({ name: 'Courses' });"
+      v-on:click="if (!props.crsIsActive) router.push({ name: 'CoursesHome' });"
       v-bind:class="{ activeCrs: props.crsIsActive }"
     >
       Courses
