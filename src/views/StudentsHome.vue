@@ -10,6 +10,9 @@
         <div class="searchSect">
           <Search :type="$route.name" v-on:query-data="handleData" />
         </div>
+        <div class="dashboard">
+          <StudentsDash v-if="!state.searching" />
+        </div>
       </div>
     </div>
   </div>
@@ -20,11 +23,13 @@ import { reactive } from "vue";
 import Connecting from "@/components/Connecting";
 import Nav from "@/components/Nav";
 import Search from "@/components/Search";
+import StudentsDash from "@/components/StudentsDash";
 
 export default {
   setup() {
     const state = reactive({
       loading: false,
+      searching: false,
       studentsSearchRes: [],
     });
 
@@ -39,6 +44,7 @@ export default {
       Nav,
       Search,
       handleData,
+      StudentsDash,
     };
   },
 };
@@ -56,10 +62,7 @@ export default {
   height: 87%;
   margin-right: 60px;
 }
-.studentSect {
-  height: 87%;
-  width: 70%;
-}
+
 h1 {
   font-family: "Poppins";
   color: #212121;
@@ -67,5 +70,8 @@ h1 {
 }
 .searchSect {
   margin-top: 15px;
+}
+.dashboard {
+  width: 100%;
 }
 </style>

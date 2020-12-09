@@ -44,4 +44,16 @@ img {
     url("./assets/Poppins/Poppins-SemiBold.ttf") format("woff"),
     url("./assets/Poppins/Poppins-SemiBold.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Poppinsm";
+  src: url("./assets/Poppins/Poppins-Medium.ttf") format("woff2"),
+    url("./assets/Poppins/Poppins-Medium.ttf") format("woff"),
+    url("./assets/Poppins/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppinsb";
+  src: url("./assets/Poppins/Poppins-Bold.ttf") format("woff2"),
+    url("./assets/Poppins/Poppins-Bold.ttf") format("woff"),
+    url("./assets/Poppins/Poppins-Bold.ttf") format("truetype");
+}
 </style>
