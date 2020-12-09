@@ -47,7 +47,7 @@ export default {
 }
 .navSect {
   height: 87%;
-  margin-right: 40px;
+  margin-right: 60px;
 }
 .studentSect {
   height: 87%;

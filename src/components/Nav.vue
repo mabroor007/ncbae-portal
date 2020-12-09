@@ -41,7 +41,7 @@ export default {
 .main {
   display: flex;
   flex-direction: column;
-  max-height: 400px;
+  max-height: 440px;
   width: 100%;
 }
 button {
