@@ -38,4 +38,10 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/Poppins/Poppins-SemiBold.ttf") format("woff2"),
+    url("./assets/Poppins/Poppins-SemiBold.ttf") format("woff"),
+    url("./assets/Poppins/Poppins-SemiBold.ttf") format("truetype");
+}
 </style>

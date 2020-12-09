@@ -24,10 +24,12 @@
 
 <script>
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import Connecting from "@/components/Connecting";
 
 export default {
   setup() {
+    const router = useRouter();
     const state = reactive({
       dbConnected: false,
       loginData: {
@@ -35,12 +37,15 @@ export default {
         password: "",
       },
     });
+
     const handleLogin = () => {
-      console.log(state.loginData);
+      router.push({ name: "StudentsHome" });
     };
+
     setTimeout(() => {
       state.dbConnected = true;
     }, 5000);
+
     return {
       state,
       Connecting,
