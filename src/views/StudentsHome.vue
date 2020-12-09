@@ -3,10 +3,13 @@
     <Connecting :load="state.loading" />
     <div class="main">
       <div class="navSect">
-        <Nav v-bind:tchIsActive="true" />
+        <Nav v-bind:stdIsActive="true" />
       </div>
       <div class="studentSect">
-        <h3>Hai i am studentSect</h3>
+        <h1>Students</h1>
+        <div class="searchSect">
+          <Search />
+        </div>
       </div>
     </div>
   </div>
@@ -16,9 +19,9 @@
 import { reactive } from "vue";
 import Connecting from "@/components/Connecting";
 import Nav from "@/components/Nav";
+import Search from "@/components/Search";
 
 export default {
-  components: { Nav },
   setup() {
     const state = reactive({
       loading: false,
@@ -28,6 +31,7 @@ export default {
       state,
       Connecting,
       Nav,
+      Search,
     };
   },
 };
@@ -42,9 +46,19 @@ export default {
   align-items: center;
 }
 .navSect {
-  /* background: blueviolet; */
+  height: 87%;
+  margin-right: 40px;
 }
 .studentSect {
-  background: burlywood;
+  height: 87%;
+  width: 70%;
+}
+h1 {
+  font-family: "Poppins";
+  color: #212121;
+  font-size: 28px;
+}
+.searchSect {
+  margin-top: 15px;
 }
 </style>

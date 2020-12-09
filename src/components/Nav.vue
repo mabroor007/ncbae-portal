@@ -41,13 +41,14 @@ export default {
 .main {
   display: flex;
   flex-direction: column;
-  min-width: 160px;
+  max-height: 400px;
+  width: 100%;
 }
 button {
   padding: 5px 15px;
   font-family: "Poppins";
   font-weight: 600;
-  font-size: 22px;
+  font-size: 1.1rem;
   background: none;
   outline: none;
   border: none;
