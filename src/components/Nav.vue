@@ -45,7 +45,7 @@ export default {
   width: 100%;
 }
 button {
-  padding: 5px 15px;
+  padding: 5px 12px;
   font-family: "Poppins";
   font-weight: 600;
   font-size: 1.1rem;

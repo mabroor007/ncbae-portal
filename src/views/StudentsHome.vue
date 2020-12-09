@@ -8,7 +8,7 @@
       <div class="studentSect">
         <h1>Students</h1>
         <div class="searchSect">
-          <Search />
+          <Search :type="$route.name" />
         </div>
       </div>
     </div>

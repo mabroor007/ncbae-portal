@@ -1,11 +1,17 @@
 <template>
   <div>
-    <form>
-      <input id="search" placeholder="Search" type="search" />
-      <select>
-        <option>By Name</option>
-        <option>By Rollno</option>
-        <option>By Course</option>
+    <form @submit.prevent="srch">
+      <input
+        @keydown="srchOnChange"
+        v-model="state.searchText"
+        id="search"
+        placeholder="Search"
+        type="search"
+      />
+      <select v-model="state.selected">
+        <option value="Name">Name</option>
+        <option value="Rollno">Rollno</option>
+        <option value="Course">Course</option>
       </select>
     </form>
   </div>
@@ -15,9 +21,25 @@
 import { reactive } from "vue";
 
 export default {
-  setup() {
-    const state = reactive({ selected: "By Name" });
-    return { state };
+  props: {
+    type: String,
+  },
+  setup(props) {
+    const state = reactive({
+      selected: "Name",
+      type: props.type,
+      searchText: "",
+    });
+
+    const srch = () => {
+      console.log(state);
+    };
+
+    const srchOnChange = () => {
+      console.log(state);
+    };
+
+    return { state, srch, srchOnChange };
   },
 };
 </script>
