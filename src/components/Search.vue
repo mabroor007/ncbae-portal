@@ -24,7 +24,7 @@ export default {
   props: {
     type: String,
   },
-  setup(props) {
+  setup(props, { emit }) {
     const state = reactive({
       selected: "Name",
       type: props.type,
@@ -32,11 +32,11 @@ export default {
     });
 
     const srch = () => {
-      console.log(state);
+      emit("data", { name: "Mabroor Ahmad", age: 19 });
     };
 
     const srchOnChange = () => {
-      console.log(state);
+      emit("query-data", { name: "Mabroor Ahmad", age: 19 });
     };
 
     return { state, srch, srchOnChange };

@@ -8,7 +8,7 @@
       <div class="studentSect">
         <h1>Students</h1>
         <div class="searchSect">
-          <Search :type="$route.name" />
+          <Search :type="$route.name" v-on:query-data="handleData" />
         </div>
       </div>
     </div>
@@ -25,13 +25,20 @@ export default {
   setup() {
     const state = reactive({
       loading: false,
+      studentsSearchRes: [],
     });
+
+    const handleData = (data) => {
+      console.log("Data", data);
+      // state.studentsSearchRes = data;
+    };
 
     return {
       state,
       Connecting,
       Nav,
       Search,
+      handleData,
     };
   },
 };
