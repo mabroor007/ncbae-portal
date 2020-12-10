@@ -15,7 +15,7 @@
         <div class="value">{{ state.weekendCourses }}</div>
       </div>
     </div>
-    <div @click="$router.push({ name: 'AddTeacher' })" class="add">
+    <div @click="$router.push({ name: 'AddCourse' })" class="add">
       <div>Add Courses</div>
     </div>
   </div>

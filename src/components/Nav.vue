@@ -62,6 +62,7 @@ button {
   cursor: pointer;
   transition: all 0.2s;
   color: #212121;
+  filter: drop-shadow(0 0 37px rgba(0, 0, 0, 0.253));
 }
 button:hover {
   color: whitesmoke;
