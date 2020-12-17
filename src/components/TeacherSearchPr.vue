@@ -1,5 +1,13 @@
 <template>
-  <div class="card">
+  <div
+    @click="
+      $router.push({
+        name: 'TeacherDetail',
+        params: { id: $props.teacher.id },
+      })
+    "
+    class="card"
+  >
     <div class="imgPart">
       <img class="img" :src="$props.teacher.profilePic" />
     </div>

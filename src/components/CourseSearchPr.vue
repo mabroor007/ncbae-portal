@@ -1,5 +1,13 @@
 <template>
-  <div class="card">
+  <div
+    @click="
+      $router.push({
+        name: 'CourseDetail',
+        params: { id: $props.course.id },
+      })
+    "
+    class="card"
+  >
     <div class="imgPart">
       <img class="img" src="../assets/course.svg" />
     </div>
@@ -30,11 +38,11 @@ export default {
   margin: 0 5px;
   display: flex;
   align-items: center;
-  background: rgb(52, 255, 97);
+  background: rgb(135, 87, 237);
   background: linear-gradient(
     90deg,
-    rgb(38, 226, 79) 0%,
-    rgba(28, 228, 120, 1) 100%
+    rgba(135, 87, 237, 1) 0%,
+    rgba(77, 81, 255, 1) 100%
   );
   border-radius: 9px;
   overflow: hidden;

@@ -5,6 +5,7 @@ export const StudentsData = [
     father: "William Jhon",
     course: "Bachelor Of Computer Science",
     age: 19,
+    id: 1,
   },
   {
     name: "Jack Reacher",
@@ -12,6 +13,7 @@ export const StudentsData = [
     course: "Bachelor Of Business & Administration",
     age: 18,
     profilePic: "http://picsum.photos/400",
+    id: 2,
   },
   {
     name: "Snake Eyes",
@@ -19,6 +21,7 @@ export const StudentsData = [
     course: "Bachelor Of Business & Administration",
     age: 18,
     profilePic: "http://picsum.photos/400",
+    id: 3,
   },
   {
     name: "WickShot",
@@ -26,6 +29,7 @@ export const StudentsData = [
     course: "Information & Technology",
     age: 18,
     profilePic: "http://picsum.photos/400",
+    id: 3,
   },
   {
     name: "Jack Reacher",

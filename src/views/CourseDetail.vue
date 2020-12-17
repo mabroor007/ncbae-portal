@@ -3,7 +3,7 @@
     <div class="main">
       <div class="mainContent">
         <div class="backBtn">
-          <div class="btn" @click="$router.push({ name: 'StudentsHome' })">
+          <div class="btn" @click="$router.push({ name: 'CoursesHome' })">
             <div class="back">
               <svg
                 width="100%"
@@ -19,7 +19,7 @@
             </div>
           </div>
           <div class="title">
-            Students
+            Courses
           </div>
         </div>
 
@@ -27,7 +27,7 @@
           <div class="etitle">
             Edit
           </div>
-          <div class="ebtn" @click="$router.push({ name: 'EditStudent' })">
+          <div class="ebtn" @click="$router.push({ name: 'EditCourses' })">
             <div class="edit">
               <svg fill="#ffffff" width="100%" viewBox="0 0 477.873 477.873">
                 <g>
@@ -56,15 +56,14 @@
         </div>
         <div class="detailsSect">
           <div class="imgSect">
-            <img class="img" :src="state.student.img" />
+            <img class="img" src="../assets/course.svg" />
           </div>
           <div class="dataSect">
-            <div class="name">{{ state.student.name }}</div>
-            <div class="field">{{ state.student.course }}</div>
-            <div class="field">{{ state.student.rollNo }}</div>
-            <div class="field">{{ state.student.sem }}</div>
-            <div class="field">{{ state.student.session }}</div>
-            <div class="field">{{ state.student.gpa }}</div>
+            <div class="name">{{ state.course.name }}</div>
+            <div class="field">{{ state.course.code }}</div>
+            <div class="field">{{ state.course.genre }}</div>
+            <div class="field">{{ state.course.fee }}</div>
+            <div class="field">{{ state.course.timeType }}</div>
           </div>
         </div>
       </div>
@@ -77,14 +76,13 @@ import { reactive } from "vue";
 export default {
   setup() {
     const state = reactive({
-      student: {
+      course: {
         img: "http://picsum.photos/500",
-        name: "Jhon Doe",
-        course: "Bachelor of Computer Science",
-        rollNo: "MTN-23-23442",
-        sem: "4th Semester",
-        session: "2019-2023",
-        gpa: "3.9",
+        name: "Bachlor of Computer Science",
+        code: "Cs-23-4234",
+        genre: "Science",
+        fee: "450000",
+        timeType: "Regular",
       },
     });
     return { state };
@@ -177,30 +175,28 @@ export default {
   color: #212121;
 }
 .detailsSect {
-  width: 600px;
+  width: 100%;
   height: 450px;
   display: flex;
 }
 .imgSect {
-  width: 50%;
+  width: 45%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
 }
 .dataSect {
-  width: 50%;
+  width: 55%;
   height: 100%;
 }
 .img {
   width: 220px;
   height: 235px;
-  margin-right: 2rem;
-  border-radius: 20px;
   filter: drop-shadow(0 0 37px rgba(0, 0, 0, 0.253));
 }
 .name {
   font-family: "Poppins";
-  font-size: 38px;
+  font-size: 25px;
   margin-top: 0.5rem;
 }
 .field {

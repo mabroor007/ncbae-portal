@@ -3,7 +3,7 @@
     <div class="main">
       <div class="mainContent">
         <div class="backBtn">
-          <div class="btn" @click="$router.push({ name: 'StudentsHome' })">
+          <div class="btn" @click="$router.push({ name: 'TeachersHome' })">
             <div class="back">
               <svg
                 width="100%"
@@ -19,7 +19,7 @@
             </div>
           </div>
           <div class="title">
-            Students
+            Teachers
           </div>
         </div>
 
@@ -27,7 +27,7 @@
           <div class="etitle">
             Edit
           </div>
-          <div class="ebtn" @click="$router.push({ name: 'EditStudent' })">
+          <div class="ebtn" @click="$router.push({ name: 'EditTeacher' })">
             <div class="edit">
               <svg fill="#ffffff" width="100%" viewBox="0 0 477.873 477.873">
                 <g>
@@ -56,15 +56,14 @@
         </div>
         <div class="detailsSect">
           <div class="imgSect">
-            <img class="img" :src="state.student.img" />
+            <img class="img" :src="state.teacher.img" />
           </div>
           <div class="dataSect">
-            <div class="name">{{ state.student.name }}</div>
-            <div class="field">{{ state.student.course }}</div>
-            <div class="field">{{ state.student.rollNo }}</div>
-            <div class="field">{{ state.student.sem }}</div>
-            <div class="field">{{ state.student.session }}</div>
-            <div class="field">{{ state.student.gpa }}</div>
+            <div class="name">{{ state.teacher.name }}</div>
+            <div class="field">{{ state.teacher.qualification }}</div>
+            <div class="field">{{ state.teacher.phone }}</div>
+            <div class="field">{{ state.teacher.dob }}</div>
+            <div class="field">{{ state.teacher.subject }}</div>
           </div>
         </div>
       </div>
@@ -77,14 +76,13 @@ import { reactive } from "vue";
 export default {
   setup() {
     const state = reactive({
-      student: {
+      teacher: {
         img: "http://picsum.photos/500",
-        name: "Jhon Doe",
-        course: "Bachelor of Computer Science",
-        rollNo: "MTN-23-23442",
-        sem: "4th Semester",
-        session: "2019-2023",
-        gpa: "3.9",
+        name: "Jhon Smith",
+        qualification: "Phd",
+        phone: "03434231342",
+        dob: "1990",
+        subject: "COmputer science",
       },
     });
     return { state };
@@ -131,7 +129,7 @@ export default {
   align-items: center;
   justify-content: center;
 
-  background: #ffb629;
+  background: #1ce478;
   border-radius: 15px;
   cursor: pointer;
 
