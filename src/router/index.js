@@ -6,6 +6,8 @@ import CoursesHome from "../views/CoursesHome.vue";
 import AddStudent from "../views/AddStudent.vue";
 import AddTeacher from "../views/AddTeacher.vue";
 import AddCourse from "../views/AddCourse.vue";
+import StudentDetail from "../views/StudentDetail.vue";
+
 const routes = [
   {
     path: "/",
@@ -41,6 +43,11 @@ const routes = [
     path: "/AddCourse",
     name: "AddCourse",
     component: AddCourse,
+  },
+  {
+    path: "/StudentDetail",
+    name: "StudentDetail",
+    component: StudentDetail,
   },
 ];
 

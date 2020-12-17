@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form @submit.prevent="srch">
+    <form @submit.prevent="srchOnChange">
       <input
-        @keydown="srchOnChange"
+        @keyup="srchOnChange"
         v-model="state.searchText"
         id="search"
         placeholder="Search"
@@ -19,6 +19,7 @@
 
 <script>
 import { reactive } from "vue";
+import { StudentsData, TeachersData, CoursesData } from "./Data";
 
 export default {
   props: {
@@ -27,19 +28,17 @@ export default {
   setup(props, { emit }) {
     const state = reactive({
       selected: "Name",
-      type: props.type,
       searchText: "",
     });
 
-    const srch = () => {
-      emit("data", { name: "Mabroor Ahmad", age: 19 });
-    };
-
     const srchOnChange = () => {
-      emit("query-data", { name: "Mabroor Ahmad", age: 19 });
+      if (!state.searchText.length) return emit("query-data", null);
+      if (props.type === "StudentsHome") emit("query-data", StudentsData);
+      if (props.type === "TeachersHome") emit("query-data", TeachersData);
+      if (props.type === "CoursesHome") emit("query-data", CoursesData);
     };
 
-    return { state, srch, srchOnChange };
+    return { state, srchOnChange };
   },
 };
 </script>
@@ -68,7 +67,8 @@ select {
   position: relative;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: #56caed;
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0085ff 0%, #48c4fa 100%);
   color: white;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;

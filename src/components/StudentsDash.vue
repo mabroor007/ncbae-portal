@@ -42,6 +42,7 @@ export default {
 <style scoped>
 .statsBox {
   width: 100%;
+  height: 400px;
 }
 h1 {
   font-family: "Poppins";
@@ -52,12 +53,8 @@ h1 {
 .dataBox {
   width: 450px;
   height: 160px;
-  background: rgb(46, 155, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(46, 155, 255, 1) 0%,
-    rgba(86, 202, 237, 1) 100%
-  );
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0085ff 0%, #48c4fa 100%);
   color: white;
   font-family: "Poppinsm";
   font-weight: medium;

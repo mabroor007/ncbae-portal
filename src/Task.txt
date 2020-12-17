@@ -2,4 +2,21 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
 </div>
+
+
 <router-link :to="{ name:'About'}">About</router-link>
+
+<router-link :to="{ name: 'Page2', params: { id: 1234 } }">Navigate to Page2</router-link>
+
+<div @click="$router.push({ name: 'AddStudent' })" class="add">
+     <div>Add Student</div>
+</div>
+
+import { useRouter } from "vue-router";
+    const router = useRouter();
+    router.push({ name: "TeachersHome", params: { id:1234 } });
+
+
+<div>Searching {{ $props.res }} type : {{ $props.type }}</div>
+
+        @blur="$emit('query-data', null)"

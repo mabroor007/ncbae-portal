@@ -12,6 +12,11 @@
         </div>
         <div class="dashboard">
           <TeachersDash v-if="!state.searching" />
+          <SearchResults
+            :type="$route.name"
+            :res="state.teacherSearchRes"
+            v-if="state.searching"
+          />
         </div>
       </div>
     </div>
@@ -24,6 +29,7 @@ import Connecting from "@/components/Connecting";
 import Nav from "@/components/Nav";
 import Search from "@/components/Search";
 import TeachersDash from "@/components/TeachersDash";
+import SearchResults from "@/components/SearchResults";
 
 export default {
   setup() {
@@ -34,8 +40,9 @@ export default {
     });
 
     const handleData = (data) => {
-      console.log("Data", data);
-      // state.teacherSearchRes = data;
+      if (!data) return (state.searching = false);
+      state.searching = true;
+      state.teacherSearchRes = data;
     };
 
     return {
@@ -45,6 +52,7 @@ export default {
       Search,
       handleData,
       TeachersDash,
+      SearchResults,
     };
   },
 };
@@ -73,5 +81,6 @@ h1 {
 }
 .dashboard {
   width: 100%;
+  height: 400px;
 }
 </style>

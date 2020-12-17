@@ -12,6 +12,11 @@
         </div>
         <div class="dashboard">
           <StudentsDash v-if="!state.searching" />
+          <SearchResults
+            :type="$route.name"
+            :res="state.studentsSearchRes"
+            v-if="state.searching"
+          />
         </div>
       </div>
     </div>
@@ -24,8 +29,10 @@ import Connecting from "@/components/Connecting";
 import Nav from "@/components/Nav";
 import Search from "@/components/Search";
 import StudentsDash from "@/components/StudentsDash";
+import SearchResults from "@/components/SearchResults";
 
 export default {
+  components: { SearchResults },
   setup() {
     const state = reactive({
       loading: false,
@@ -34,8 +41,9 @@ export default {
     });
 
     const handleData = (data) => {
-      console.log("Data", data);
-      // state.studentsSearchRes = data;
+      if (!data) return (state.searching = false);
+      state.searching = true;
+      state.studentsSearchRes = data;
     };
 
     return {
@@ -45,6 +53,7 @@ export default {
       Search,
       handleData,
       StudentsDash,
+      SearchResults,
     };
   },
 };
@@ -73,5 +82,6 @@ h1 {
 }
 .dashboard {
   width: 100%;
+  height: 400px;
 }
 </style>
