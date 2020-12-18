@@ -27,7 +27,15 @@
           <div class="etitle">
             Edit
           </div>
-          <div class="ebtn" @click="$router.push({ name: 'EditStudent' })">
+          <div
+            class="ebtn"
+            @click="
+              $router.push({
+                name: 'UpdateStudent',
+                params: { id: state.student.id },
+              })
+            "
+          >
             <div class="edit">
               <svg fill="#ffffff" width="100%" viewBox="0 0 477.873 477.873">
                 <g>

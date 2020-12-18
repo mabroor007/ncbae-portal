@@ -10,6 +10,9 @@ import StudentDetail from "../views/StudentDetail.vue";
 import TeacherDetail from "../views/TeacherDetail.vue";
 import CourseDetail from "../views/CourseDetail.vue";
 import Del from "../views/Del.vue";
+import UpdateStudent from "../views/UpdateStudent.vue";
+import UpdateTeacher from "../views/UpdateTeacher.vue";
+import UpdateCourse from "../views/UpdateCourse.vue";
 
 const routes = [
   {
@@ -66,6 +69,21 @@ const routes = [
     path: "/Del",
     name: "Del",
     component: Del,
+  },
+  {
+    path: "/UpdateStudent",
+    name: "UpdateStudent",
+    component: UpdateStudent,
+  },
+  {
+    path: "/UpdateTeacher",
+    name: "UpdateTeacher",
+    component: UpdateTeacher,
+  },
+  {
+    path: "/UpdateCourse",
+    name: "UpdateCourse",
+    component: UpdateCourse,
   },
 ];
 
