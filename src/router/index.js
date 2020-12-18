@@ -9,6 +9,7 @@ import AddCourse from "../views/AddCourse.vue";
 import StudentDetail from "../views/StudentDetail.vue";
 import TeacherDetail from "../views/TeacherDetail.vue";
 import CourseDetail from "../views/CourseDetail.vue";
+import Del from "../views/Del.vue";
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: "/CourseDetail",
     name: "CourseDetail",
     component: CourseDetail,
+  },
+  {
+    path: "/Del",
+    name: "Del",
+    component: Del,
   },
 ];
 
