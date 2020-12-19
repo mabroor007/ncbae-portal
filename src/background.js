@@ -1,25 +1,40 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
-import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
-import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import {
+  app,
+  protocol,
+  BrowserWindow
+} from "electron";
+import {
+  createProtocol
+} from "vue-cli-plugin-electron-builder/lib";
+import installExtension, {
+  VUEJS_DEVTOOLS
+} from "electron-devtools-installer";
+import path from "path";
 const isDevelopment = process.env.NODE_ENV !== "production";
-require('./api/api.js');
+// require("./api/api.js");
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([
-  { scheme: "app", privileges: { secure: true, standard: true } }
-]);
+protocol.registerSchemesAsPrivileged([{
+  scheme: "app",
+  privileges: {
+    secure: true,
+    standard: true
+  }
+}, ]);
 
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    autoHideMenuBar:true,
+    width: 1366,
+    height: 768,
+    // icon: path.join(__static, "icon.png"),
+    title: "NCBA&E",
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
-    }
+      enableRemoteModule: true,
+    },
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -31,7 +46,6 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
-  win.maximize();
 }
 
 // Quit when all windows are closed.
@@ -67,7 +81,7 @@ app.on("ready", async () => {
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === "win32") {
-    process.on("message", data => {
+    process.on("message", (data) => {
       if (data === "graceful-exit") {
         app.quit();
       }

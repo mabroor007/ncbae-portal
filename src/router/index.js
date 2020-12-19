@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
 import Home from "../views/Home.vue";
 import StudentsHome from "../views/StudentsHome.vue";
 import TeachersHome from "../views/TeachersHome.vue";
@@ -14,8 +18,7 @@ import UpdateStudent from "../views/UpdateStudent.vue";
 import UpdateTeacher from "../views/UpdateTeacher.vue";
 import UpdateCourse from "../views/UpdateCourse.vue";
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Home",
     component: Home,
@@ -88,7 +91,8 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: process.env.IS_ELECTRON ?
+    createWebHashHistory() : createWebHistory(),
   routes,
 });
 
