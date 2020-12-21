@@ -58,7 +58,6 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { reactive } from "vue";
 
 export default {
   setup() {

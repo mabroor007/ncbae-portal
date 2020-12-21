@@ -139,12 +139,10 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import Connecting from "@/components/Connecting";
-import { ref } from "vue";
 
 export default {
   setup() {
     const router = useRouter();
-    const punch = ref();
     const state = reactive({
       loading: false,
       name: "",

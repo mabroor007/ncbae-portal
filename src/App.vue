@@ -1,10 +1,56 @@
 <template>
-  <router-view v-slot="{ Component }">
+  <div>
+    <router-view v-slot="{ Component }">
+      <transition name="slide">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+
     <transition name="slide">
-      <component :is="Component" />
+      <BackStack :queries="state.queries" v-if="state.showStack" />
     </transition>
-  </router-view>
+  </div>
 </template>
+
+<script>
+import BackStack from "@/components/BackStack";
+import { reactive } from "vue";
+
+export default {
+  setup() {
+    const state = reactive({
+      showStack: false,
+      queries: [
+        {
+          title: "Added Student",
+          code: `CREATE TABLE courses(
+    id uuid DEFAULT uuid_generate_v4 (),
+    course_name VARCHAR(30) NOT NULL,
+    course_code VARCHAR(25) UNIQUE NOT NULL,
+    course_type VARCHAR(7) NOT NULL CHECK(course_type = 'Regular' OR course_type = 'Weekend'),
+    fee VARCHAR(50) NOT NULL,
+    genre VARCHAR(25) NOT NULL,
+    start_yr INTEGER NOT NULL,
+    end_yr INTEGER NOT NULL
+);`,
+        },
+      ],
+    });
+
+    // Event for Toggleing Backstack
+    document.addEventListener("keypress", (e) => {
+      if (e.ctrlKey && e.key === "s") {
+        return (state.showStack = !state.showStack);
+      }
+    });
+
+    return {
+      BackStack,
+      state,
+    };
+  },
+};
+</script>
 
 <style>
 ::-webkit-scrollbar {
@@ -46,6 +92,12 @@ img {
   src: url("./assets/Poppins/Poppins-SemiBold.ttf") format("woff2"),
     url("./assets/Poppins/Poppins-SemiBold.ttf") format("woff"),
     url("./assets/Poppins/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppinsl";
+  src: url("./assets/Poppins/Poppins-Light.ttf") format("woff2"),
+    url("./assets/Poppins/Poppins-Light.ttf") format("woff"),
+    url("./assets/Poppins/Poppins-Light.ttf") format("truetype");
 }
 @font-face {
   font-family: "Poppinsm";
