@@ -1,31 +1,36 @@
 "use strict";
 
-import {
-  app,
-  protocol,
-  BrowserWindow
-} from "electron";
-import {
-  createProtocol
-} from "vue-cli-plugin-electron-builder/lib";
-import installExtension, {
-  VUEJS_DEVTOOLS
-} from "electron-devtools-installer";
-import path from "path";
+import { app, protocol, BrowserWindow } from "electron";
+import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
-// require("./api/api.js");
+const eventEmitter = require("./api/api.js");
+
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([{
-  scheme: "app",
-  privileges: {
-    secure: true,
-    standard: true
-  }
-}, ]);
+let win;
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: "app",
+    privileges: {
+      secure: true,
+      standard: true,
+    },
+  },
+]);
+
+eventEmitter.on("dbConnected", () => {
+  win.webContents.on("did-finish-load", () => {
+    win.webContents.send("dbConnected");
+  });
+});
+
+eventEmitter.on("mainmsg", ({ title, code }) => {
+  win.webContents.send("mainmsg", { title, code });
+});
 
 async function createWindow() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1366,
     height: 768,
     // icon: path.join(__static, "icon.png"),

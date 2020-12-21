@@ -26,6 +26,7 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import Connecting from "@/components/Connecting";
+const { ipcRenderer } = window.require("electron");
 
 export default {
   setup() {
@@ -38,13 +39,23 @@ export default {
       },
     });
 
-    const handleLogin = () => {
-      router.push({ name: "StudentsHome" });
-    };
-
-    setTimeout(() => {
+    ipcRenderer.on("dbConnected", () => {
       state.dbConnected = true;
-    }, 5000);
+    });
+
+    const handleLogin = async () => {
+      try {
+        const result = await ipcRenderer.invoke("login", {
+          admin: state.loginData.admin,
+          password: state.loginData.password,
+        });
+        if (result.valid) {
+          router.push({ name: "StudentsHome" });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     return {
       state,

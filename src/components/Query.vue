@@ -34,4 +34,7 @@ export default {
   font-size: 1.3rem;
   margin-bottom: 5px;
 }
+.code {
+  font-family: "Poppins";
+}
 </style>

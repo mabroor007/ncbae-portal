@@ -20,3 +20,35 @@ import { useRouter } from "vue-router";
 <div>Searching {{ $props.res }} type : {{ $props.type }}</div>
 
         @blur="$emit('query-data', null)"
+
+
+INSERT INTO students(
+    roll_no,
+    student_name,
+    father_name,
+    gender,
+    course_type,
+    phone,
+    email,
+    student_address,
+    course_name,
+    start_yr,
+    end_yr,
+    course_code,
+    profile_pic
+    
+) VALUES(
+    '12093335234',
+    'Abdal',
+    'naveed',
+    'Male',
+    'Regular',
+    '1223403446955545',
+    'userwerin@gmail.com',
+    'bsfkewusf usnsqweqwreufsianfje nsufnkn',
+    'database',
+    '2001',
+    '2005',
+    'CS-2019',
+    ''
+);

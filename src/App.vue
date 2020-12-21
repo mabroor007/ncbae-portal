@@ -16,12 +16,18 @@
 import BackStack from "@/components/BackStack";
 import { reactive } from "vue";
 import { defQueries } from "./defQueries";
+const { ipcRenderer } = window.require("electron");
 
 export default {
   setup() {
     const state = reactive({
       showStack: false,
       queries: defQueries,
+    });
+
+    ipcRenderer.on("mainmsg", (e, { title, code }) => {
+      console.log("called");
+      state.queries.unshift({ title, code });
     });
 
     // Event for Toggleing Backstack

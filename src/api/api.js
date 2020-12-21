@@ -1,12 +1,33 @@
-const { ipcMain } = require('electron');
-const sql = require('../dbConfig.js');
+const { ipcMain } = require("electron");
+const events = require("events");
+const sql = require("../dbConfig.js");
+const eventEmitter = new events.EventEmitter();
 
-ipcMain.handle('msg', async (event, msg) => {
-  console.log("Msg From Renderer :",msg);
-  return "OK";
+eventEmitter.on("conn", async () => {
+  try {
+    const result = await sql`SELECT student_name FROM students;`;
+    if (result) {
+      eventEmitter.emit("dbConnected");
+    }
+  } catch (error) {
+    console.log(error);
+    eventEmitter.emit("conn");
+  }
 });
 
-ipcMain.handle('getUsers', async (event, msg) => {
-  const result = await sql`SELECT * FROM person;`;
-  return result;
+eventEmitter.emit("conn");
+
+ipcMain.handle("login", async (e, { admin, password }) => {
+  if (admin === "mabroordev" && password === "mabroordev") {
+    eventEmitter.emit("mainmsg", { title: "Loged in", code: `--${admin}` });
+    return { valid: true };
+  } else {
+    eventEmitter.emit("mainmsg", {
+      title: "Error",
+      code: `--Invalid Credentials`,
+    });
+    return { valid: false };
+  }
 });
+
+module.exports = eventEmitter;
