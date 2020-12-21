@@ -25,10 +25,11 @@ export default {
 <style scoped>
 .stackPage {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 350px;
+  top: 0px;
+  left: 0px;
+  max-width: 90vw;
   height: 95vh;
+  margin: 20px;
   padding: 20px;
   border-radius: 10px;
   background-image: radial-gradient(
@@ -44,5 +45,10 @@ export default {
   font-size: 1.5rem;
   color: white;
   margin-bottom: 10px;
+  height: 5%;
+}
+.ops {
+  height: 94%;
+  overflow-y: scroll;
 }
 </style>

@@ -15,26 +15,13 @@
 <script>
 import BackStack from "@/components/BackStack";
 import { reactive } from "vue";
+import { defQueries } from "./defQueries";
 
 export default {
   setup() {
     const state = reactive({
       showStack: false,
-      queries: [
-        {
-          title: "Added Student",
-          code: `CREATE TABLE courses(
-    id uuid DEFAULT uuid_generate_v4 (),
-    course_name VARCHAR(30) NOT NULL,
-    course_code VARCHAR(25) UNIQUE NOT NULL,
-    course_type VARCHAR(7) NOT NULL CHECK(course_type = 'Regular' OR course_type = 'Weekend'),
-    fee VARCHAR(50) NOT NULL,
-    genre VARCHAR(25) NOT NULL,
-    start_yr INTEGER NOT NULL,
-    end_yr INTEGER NOT NULL
-);`,
-        },
-      ],
+      queries: defQueries,
     });
 
     // Event for Toggleing Backstack
