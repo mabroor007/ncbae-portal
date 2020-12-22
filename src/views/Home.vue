@@ -39,9 +39,21 @@ export default {
       },
     });
 
-    ipcRenderer.on("dbConnected", () => {
-      state.dbConnected = true;
-    });
+    const conectToDb = async () => {
+      try {
+        const res = await ipcRenderer.invoke("checkConn");
+        if (res.conn) {
+          clearInterval(inter);
+          state.dbConnected = true;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const inter = setInterval(() => {
+      conectToDb();
+    }, 5000);
 
     const handleLogin = async () => {
       try {
@@ -92,7 +104,6 @@ input {
   margin-bottom: 0.5rem;
   border-radius: 12px;
   outline: none;
-  transition: all 0.3s;
   font-family: "Poppinsm";
 }
 button {

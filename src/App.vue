@@ -26,7 +26,6 @@ export default {
     });
 
     ipcRenderer.on("mainmsg", (e, { title, code }) => {
-      console.log("called");
       state.queries.unshift({ title, code });
     });
 
