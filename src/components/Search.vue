@@ -11,7 +11,7 @@
       <select v-model="state.selected">
         <option value="Name">Name</option>
         <option value="Rollno">Rollno</option>
-        <option value="Course">Course</option>
+        <option value="CourseCode">Course code</option>
       </select>
     </form>
   </div>
@@ -19,7 +19,7 @@
 
 <script>
 import { reactive } from "vue";
-import { StudentsData, TeachersData, CoursesData } from "./Data";
+const { ipcRenderer } = window.require("electron");
 
 export default {
   props: {
@@ -31,14 +31,26 @@ export default {
       searchText: "",
     });
 
-    const srchOnChange = () => {
-      if (!state.searchText.length) return emit("query-data", null);
-      if (props.type === "StudentsHome") emit("query-data", StudentsData);
-      if (props.type === "TeachersHome") emit("query-data", TeachersData);
-      if (props.type === "CoursesHome") emit("query-data", CoursesData);
+    const getSearchResults = async (text, pType, opt) => {
+      try {
+        const res = await ipcRenderer.invoke("search", { text, pType, opt });
+        if (res.results) {
+          emit("query-data", res.results);
+        } else {
+          console.log(res);
+          emit("query-data", []);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    return { state, srchOnChange };
+    const srchOnChange = () => {
+      if (!state.searchText.length) return emit("query-data", null);
+      getSearchResults(state.searchText, props.type, state.selected);
+    };
+
+    return { getSearchResults, state, srchOnChange };
   },
 };
 </script>

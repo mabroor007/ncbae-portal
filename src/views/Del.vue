@@ -20,7 +20,7 @@
           </svg>
         </div>
         <div class="actionBox">
-          <div @click="$router.go(-1)" class="back">
+          <div @click="handleBack" class="back">
             <div class="no">
               <svg version="1.1" width="100%" viewBox="0 0 95.939 95.939">
                 <g>
@@ -58,27 +58,47 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
+const { ipcRenderer } = window.require("electron");
 
 export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
 
-    const handleDel = () => {
+    const handleBack = () => {
       if (route.params.page === "StudentDetail") {
-        console.log("Student Deleted :", route.params.id);
-        router.push({ name: "StudentsHome" });
+        router.push({ name: "StudentDetail", params: { id: route.params.id } });
       }
       if (route.params.page === "TeacherDetail") {
-        console.log("Teacher Deleted :", route.params.id);
-        router.push({ name: "TeachersHome" });
+        router.push({ name: "TeacherDetail", params: { id: route.params.id } });
       }
       if (route.params.page === "CourseDetail") {
-        console.log("Course Deleted :", route.params.id);
-        router.push({ name: "CoursesHome" });
+        router.push({ name: "CourseDetail", params: { id: route.params.id } });
       }
     };
-    return { handleDel };
+
+    const handleDel = async () => {
+      try {
+        const res = await ipcRenderer.invoke("delete", {
+          pType: route.params.page,
+          id: route.params.id,
+        });
+        if (res.del) {
+          if (route.params.page === "StudentDetail") {
+            router.push({ name: "StudentsHome" });
+          }
+          if (route.params.page === "TeacherDetail") {
+            router.push({ name: "TeachersHome" });
+          }
+          if (route.params.page === "CourseDetail") {
+            router.push({ name: "CoursesHome" });
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    return { handleDel, handleBack };
   },
 };
 </script>

@@ -9,13 +9,13 @@
     class="card"
   >
     <div class="imgPart">
-      <img class="img" :src="$props.student.profilePic" />
+      <img class="img" :src="$props.student.profile_pic" />
     </div>
     <div class="detailPart">
       <p class="name">
-        {{ $props.student.name }} S/o {{ $props.student.father }}
+        {{ $props.student.student_name }} S/o {{ $props.student.father_name }}
       </p>
-      <p class="course">{{ $props.student.course }}</p>
+      <p class="course">{{ $props.student.course_name }}</p>
     </div>
   </div>
 </template>
@@ -59,6 +59,7 @@ export default {
   height: 50px;
   background: white;
   border-radius: 50%;
+  object-fit: cover;
 }
 .detailPart {
   display: flex;

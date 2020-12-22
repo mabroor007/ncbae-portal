@@ -95,15 +95,22 @@
         </div>
         <div class="detailsSect">
           <div class="imgSect">
-            <img class="img" :src="state.student.img" />
+            <img class="img" :src="state.student.profile_pic" />
           </div>
           <div class="dataSect">
-            <div class="name">{{ state.student.name }}</div>
-            <div class="field">{{ state.student.course }}</div>
-            <div class="field">{{ state.student.rollNo }}</div>
-            <div class="field">{{ state.student.sem }}</div>
-            <div class="field">{{ state.student.session }}</div>
-            <div class="field">{{ state.student.gpa }}</div>
+            <div class="name">{{ state.student.student_name }}</div>
+            <div class="field">{{ state.student.father_name }}</div>
+            <div class="field">{{ state.student.course_name }}</div>
+            <div class="field">{{ state.student.gender }}</div>
+            <div class="field">{{ state.student.course_type }}</div>
+            <div class="field">{{ state.student.phone }}</div>
+            <div class="field">{{ state.student.email }}</div>
+            <div class="field">{{ state.student.student_address }}</div>
+            <div class="field">
+              {{ state.student.start_yr }}-{{ state.student.end_yr }}
+            </div>
+            <div class="field">{{ state.student.roll_no }}</div>
+            <div class="field">{{ state.student.course_code }}</div>
           </div>
         </div>
       </div>
@@ -112,20 +119,44 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
+const { ipcRenderer } = window.require("electron");
+
 export default {
   setup() {
+    const route = useRoute();
     const state = reactive({
       student: {
-        id: 1,
-        img: "http://picsum.photos/500",
-        name: "Jhon Doe",
-        course: "Bachelor of Computer Science",
-        rollNo: "MTN-23-23442",
-        sem: "4th Semester",
-        session: "2019-2023",
-        gpa: "3.9",
+        id: "",
+        roll_no: "",
+        student_name: "",
+        father_name: "",
+        gender: "",
+        course_type: "",
+        phone: "",
+        email: "",
+        student_address: "",
+        course_name: "",
+        start_yr: "",
+        end_yr: "",
+        course_code: "",
+        profile_pic: "",
       },
+    });
+
+    onMounted(async () => {
+      try {
+        const res = await ipcRenderer.invoke(
+          "getStudentDetails",
+          route.params.id
+        );
+        if (res.done) {
+          state.student = res.student;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     });
     return { state };
   },
@@ -254,18 +285,18 @@ export default {
   color: #212121;
 }
 .detailsSect {
-  width: 600px;
+  width: 700px;
   height: 450px;
   display: flex;
 }
 .imgSect {
-  width: 50%;
+  width: 40%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
 }
 .dataSect {
-  width: 50%;
+  width: 60%;
   height: 100%;
 }
 .img {
@@ -274,11 +305,11 @@ export default {
   margin-right: 2rem;
   border-radius: 20px;
   filter: drop-shadow(0 0 37px rgba(0, 0, 0, 0.253));
+  object-fit: cover;
 }
 .name {
   font-family: "Poppins";
-  font-size: 38px;
-  margin-top: 0.5rem;
+  font-size: 35px;
 }
 .field {
   font-family: "Poppinsm";

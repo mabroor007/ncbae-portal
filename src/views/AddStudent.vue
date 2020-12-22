@@ -103,14 +103,14 @@
           <input
             v-model="state.start_yr"
             class="field"
-            placeholder="Start Year DD:MM:YY"
+            placeholder="Start Year"
             required
             type="text"
           />
           <input
             v-model="state.end_yr"
             class="field"
-            placeholder="End Year DD:MM:YY"
+            placeholder="End Year"
             required
             type="text"
           />
@@ -154,7 +154,6 @@ export default {
 
     const handleSubmit = async () => {
       if (!state.profile_pic) return;
-      console.log("--234314-33-41");
       try {
         const result = await ipcRenderer.invoke("addStudent", { ...state });
         if (result.success) {

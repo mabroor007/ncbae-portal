@@ -63,6 +63,7 @@ export default {
   height: 50px;
   background: white;
   border-radius: 50%;
+  object-fit: cover;
 }
 .detailPart {
   display: flex;
