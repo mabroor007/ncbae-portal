@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+const { ipcRenderer } = window.require("electron");
 
 export default {
   setup() {
@@ -30,6 +31,21 @@ export default {
       totalCourses: 0,
       regularCourses: 0,
       weekendCourses: 0,
+    });
+
+    onMounted(async () => {
+      try {
+        const { tResult, rResult, wResult } = await ipcRenderer.invoke(
+          "getCoursesDashCount"
+        );
+        if (tResult && rResult && wResult) {
+          state.totalCourses = tResult[0].count;
+          state.regularCourses = rResult[0].count;
+          state.weekendCourses = wResult[0].count;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     });
 
     return {

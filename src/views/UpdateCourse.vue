@@ -1,10 +1,17 @@
 <template>
   <div class="home win">
-    <Connecting :load="state.loading" />
     <div class="main">
       <div class="mainContent">
         <div class="backBtn">
-          <div class="btn" @click="$router.go(-1)">
+          <div
+            class="btn"
+            @click="
+              $router.push({
+                name: 'CourseDetail',
+                params: { id: $route.params.id },
+              })
+            "
+          >
             <div class="back">
               <svg width="100%" viewBox="0 0 24 24" fill="none">
                 <path
@@ -101,34 +108,58 @@
         </div>
         <form @submit.prevent="handleSubmit" class="infoSect">
           <input
-            v-model="state.name"
+            v-model="state.course.course_name"
             class="field"
-            placeholder="Name"
+            placeholder="Course name"
             required
             type="text"
           />
           <input
-            v-model="state.code"
+            v-model="state.course.course_code"
             class="field"
-            placeholder="Code"
+            placeholder="Course code"
             required
             type="text"
           />
           <input
-            v-model="state.fee"
+            v-model="state.course.course_type"
+            class="field"
+            placeholder="Regular | Weekend"
+            required
+            type="text"
+          />
+          <input
+            v-model="state.course.fee"
             class="field"
             placeholder="Fee"
             required
             type="text"
           />
           <input
-            v-model="state.type"
+            v-model="state.course.genre"
             class="field"
-            placeholder="Type"
+            placeholder="Genre"
+            required
+            type="text"
+          />
+          <input
+            v-model="state.course.start_yr"
+            class="field"
+            placeholder="Start Year"
+            required
+            type="text"
+          />
+          <input
+            v-model="state.course.end_yr"
+            class="field"
+            placeholder="End Year"
             required
             type="text"
           />
           <button type="submit" class="save">Update</button>
+          <div class="warn">
+            Warning! Updating Course will delete all dependent Students!
+          </div>
         </form>
       </div>
     </div>
@@ -136,26 +167,54 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import Connecting from "@/components/Connecting";
+const { ipcRenderer } = window.require("electron");
 
 export default {
   setup() {
     const router = useRouter();
     const route = useRoute();
     const state = reactive({
-      id: route.params.id,
-      loading: false,
-      name: "Bachelor of Computer Science",
-      code: "CS-16-324",
-      fee: "450000",
-      type: "Regular",
+      course: {
+        id: "",
+        course_name: "",
+        course_code: "",
+        course_type: "",
+        fee: "",
+        genre: "",
+        start_yr: "",
+        end_y: "",
+      },
+    });
+    onMounted(async () => {
+      try {
+        const res = await ipcRenderer.invoke(
+          "getCourseDetails",
+          route.params.id
+        );
+        if (res.done) {
+          state.course = res.course;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     });
 
-    const handleSubmit = () => {
-      console.log(`Course with id:${state.id} Updated Successfully!`);
-      router.push({ name: "CourseDetail", params: { id: state.id } });
+    const handleSubmit = async () => {
+      try {
+        const result = await ipcRenderer.invoke("updateCourseDetails", {
+          ...state.course,
+        });
+        if (result.success) {
+          router.push({
+            name: "CourseDetail",
+            params: { id: state.course.id },
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const handleFileChange = (e) => {
@@ -171,7 +230,6 @@ export default {
 
     return {
       state,
-      Connecting,
       handleSubmit,
       handleFileChange,
     };
@@ -205,7 +263,6 @@ export default {
   color: white;
 }
 .photo {
-  margin-right: 2rem;
   width: 220px;
   height: 235px;
   display: flex;
@@ -232,41 +289,47 @@ img {
   width: 30%;
 }
 .infoSect {
-  width: 300px;
+  width: 700px;
   height: 80%;
-  margin-top: 2rem;
+  margin-top: 4rem;
   color: white;
 
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 input.field {
   font-family: "Poppinsm";
+  width: 300px;
+  height: 60px;
   font-size: 1rem;
   border: none;
   padding: 1rem;
-  background: #8757ed;
+  background: rgb(247, 247, 247);
   border-radius: 10px;
-  color: white;
   outline: none;
   margin-bottom: 0.8rem;
-  filter: drop-shadow(0 0 37px rgba(47, 47, 47, 0.253));
+  margin-left: 1rem;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.431));
 }
-input.field::placeholder {
-  color: rgba(255, 255, 255, 0.719);
-}
+
 .save {
   font-family: "Poppinsm";
   font-size: 1rem;
   border: none;
-  margin-top: 1rem;
   padding: 1rem;
   background: #ff4848;
-  border-radius: 10px;
   outline: none;
   color: white;
+  position: absolute;
+  top: -90px;
+  right: -40px;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
   cursor: pointer;
-  filter: drop-shadow(0 0 10px rgba(56, 56, 56, 0.123));
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.431));
 }
 .backBtn {
   position: absolute;
@@ -287,7 +350,7 @@ input.field::placeholder {
   border-radius: 15px;
   cursor: pointer;
 
-  filter: drop-shadow(0 0 37px rgba(0, 0, 0, 0.431));
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.431));
 }
 .back {
   width: 25%;
@@ -301,5 +364,16 @@ input.field::placeholder {
   justify-content: center;
   margin-left: 1rem;
   color: #212121;
+}
+.warn {
+  font-family: "Poppins";
+  position: absolute;
+  bottom: 15%;
+  left: -10%;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffd900;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.431));
 }
 </style>

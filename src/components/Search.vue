@@ -10,7 +10,9 @@
       />
       <select v-model="state.selected">
         <option value="Name">Name</option>
-        <option value="Rollno">Rollno</option>
+        <option v-if="$props.type === 'StudentsHome'" value="Rollno"
+          >Rollno</option
+        >
         <option value="CourseCode">Course code</option>
       </select>
     </form>
@@ -37,7 +39,6 @@ export default {
         if (res.results) {
           emit("query-data", res.results);
         } else {
-          console.log(res);
           emit("query-data", []);
         }
       } catch (error) {

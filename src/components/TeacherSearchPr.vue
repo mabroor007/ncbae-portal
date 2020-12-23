@@ -9,13 +9,13 @@
     class="card"
   >
     <div class="imgPart">
-      <img class="img" :src="$props.teacher.profilePic" />
+      <img class="img" :src="$props.teacher.profile_pic" />
     </div>
     <div class="detailPart">
       <p class="name">
-        {{ $props.teacher.name }}
+        {{ $props.teacher.teacher_name }}
       </p>
-      <p class="qual">{{ $props.teacher.qualification }}</p>
+      <p class="qual">{{ $props.teacher.course_code }}</p>
     </div>
   </div>
 </template>

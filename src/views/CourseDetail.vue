@@ -98,11 +98,13 @@
             <img class="img" src="../assets/course.svg" />
           </div>
           <div class="dataSect">
-            <div class="name">{{ state.course.name }}</div>
-            <div class="field">{{ state.course.code }}</div>
-            <div class="field">{{ state.course.genre }}</div>
+            <div class="name">{{ state.course.course_name }}</div>
+            <div class="field">{{ state.course.course_code }}</div>
+            <div class="field">{{ state.course.course_type }}</div>
             <div class="field">{{ state.course.fee }}</div>
-            <div class="field">{{ state.course.timeType }}</div>
+            <div class="field">{{ state.course.genre }}</div>
+            <div class="field">{{ state.course.start_yr }}</div>
+            <div class="field">{{ state.course.end_yr }}</div>
           </div>
         </div>
       </div>
@@ -111,19 +113,38 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
+const { ipcRenderer } = window.require("electron");
+
 export default {
   setup() {
+    const route = useRoute();
     const state = reactive({
       course: {
-        id: 1,
-        img: "http://picsum.photos/500",
-        name: "Bachlor of Computer Science",
-        code: "Cs-23-4234",
-        genre: "Science",
-        fee: "450000",
-        timeType: "Regular",
+        id: "",
+        course_name: "",
+        course_code: "",
+        course_type: "",
+        fee: "",
+        genre: "",
+        start_yr: "",
+        end_y: "",
       },
+    });
+
+    onMounted(async () => {
+      try {
+        const res = await ipcRenderer.invoke(
+          "getCourseDetails",
+          route.params.id
+        );
+        if (res.done) {
+          state.course = res.course;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     });
     return { state };
   },
@@ -220,13 +241,13 @@ export default {
   display: flex;
 }
 .imgSect {
-  width: 45%;
+  width: 40%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
 }
 .dataSect {
-  width: 55%;
+  width: 60%;
   height: 100%;
 }
 .img {
@@ -236,7 +257,7 @@ export default {
 }
 .name {
   font-family: "Poppins";
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 0.5rem;
 }
 .field {

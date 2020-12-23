@@ -13,9 +13,9 @@
     </div>
     <div class="detailPart">
       <p class="name">
-        {{ $props.course.name }}
+        {{ $props.course.course_name }}
       </p>
-      <p class="code">{{ $props.course.code }}</p>
+      <p class="code">{{ $props.course.course_code }}</p>
     </div>
   </div>
 </template>

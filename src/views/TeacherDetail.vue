@@ -95,14 +95,18 @@
         </div>
         <div class="detailsSect">
           <div class="imgSect">
-            <img class="img" :src="state.teacher.img" />
+            <img class="img" :src="state.teacher.profile_pic" />
           </div>
           <div class="dataSect">
-            <div class="name">{{ state.teacher.name }}</div>
+            <div class="name">{{ state.teacher.teacher_name }}</div>
+            <div class="field">{{ state.teacher.course_name }}</div>
+            <div class="field">{{ state.teacher.gender }}</div>
+            <div class="field">{{ state.teacher.teacher_type }}</div>
             <div class="field">{{ state.teacher.qualification }}</div>
             <div class="field">{{ state.teacher.phone }}</div>
-            <div class="field">{{ state.teacher.dob }}</div>
-            <div class="field">{{ state.teacher.subject }}</div>
+            <div class="field">{{ state.teacher.email }}</div>
+            <div class="field">{{ state.teacher.course_code }}</div>
+            <div class="field">{{ state.teacher.subject_name }}</div>
           </div>
         </div>
       </div>
@@ -111,20 +115,43 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
+const { ipcRenderer } = window.require("electron");
+
 export default {
   setup() {
+    const route = useRoute();
     const state = reactive({
       teacher: {
-        id: 1,
-        img: "http://picsum.photos/500",
-        name: "Jhon Smith",
-        qualification: "Phd",
-        phone: "03434231342",
-        dob: "1990",
-        subject: "COmputer science",
+        id: "",
+        teacher_name: "",
+        gender: "",
+        teacher_type: "",
+        qualification: "",
+        phone: "",
+        email: "",
+        course_name: "",
+        course_code: "",
+        subject_name: "",
+        profile_pic: "",
       },
     });
+
+    onMounted(async () => {
+      try {
+        const res = await ipcRenderer.invoke(
+          "getTeacherDetails",
+          route.params.id
+        );
+        if (res.done) {
+          state.teacher = res.teacher;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
     return { state };
   },
 };
@@ -235,10 +262,11 @@ export default {
   margin-right: 2rem;
   border-radius: 20px;
   filter: drop-shadow(0 0 37px rgba(0, 0, 0, 0.253));
+  object-fit: cover;
 }
 .name {
   font-family: "Poppins";
-  font-size: 38px;
+  font-size: 35px;
   margin-top: 0.5rem;
 }
 .field {

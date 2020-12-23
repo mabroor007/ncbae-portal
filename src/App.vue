@@ -45,6 +45,10 @@ export default {
 </script>
 
 <style>
+::selection {
+  background-color: black;
+  color: white;
+}
 ::-webkit-scrollbar {
   display: none;
 }
