@@ -35,6 +35,7 @@
               </svg>
             </div>
           </div>
+          <div class="maxsize">Max 50KB</div>
         </div>
         <form @submit.prevent="handleSubmit" class="infoSect">
           <input
@@ -168,6 +169,10 @@ export default {
       if (!e.target.files) return;
       if (!/(\.jpeg|\.png|\.jpg)$/i.exec(e.target.value)) return;
 
+      if (e.target.files[0].size / 1024 > 70) {
+        return console.log("File Size Exceeds");
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         state.profile_pic = reader.result;
@@ -209,10 +214,19 @@ export default {
   justify-content: flex-end;
   align-items: flex-start;
   color: white;
+  position: relative;
+}
+.maxsize {
+  font-family: "Poppinsm";
+  position: absolute;
+  font-size: 13px;
+  padding: 10px;
+  background: #0aef4a;
+  border-radius: 0 18px 0 10px;
+  width: 85px;
 }
 .photo {
   cursor: pointer;
-  margin-right: 2rem;
   width: 220px;
   height: 235px;
   display: flex;
@@ -246,8 +260,8 @@ img {
   margin-top: 4rem;
   color: white;
 
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   position: relative;
 }
 input.field {
@@ -260,8 +274,8 @@ input.field {
   background: rgb(247, 247, 247);
   border-radius: 10px;
   outline: none;
-  margin-bottom: 0.8rem;
   margin-left: 1rem;
+  margin-bottom: 1rem;
   filter: drop-shadow(0 0 25px rgba(47, 47, 47, 0.253));
 }
 
@@ -275,7 +289,7 @@ input.field {
   color: white;
   position: absolute;
   top: -90px;
-  right: -20px;
+  right: -30px;
   width: 80px;
   height: 50px;
   display: flex;

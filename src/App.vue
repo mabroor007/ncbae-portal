@@ -29,10 +29,14 @@ export default {
       state.queries.unshift({ title, code });
     });
 
-    // Event for Toggleing Backstack
-    document.addEventListener("keypress", (e) => {
+    document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.key === "s") {
-        return (state.showStack = !state.showStack);
+        console.log("yes");
+        state.showStack = !state.showStack;
+      }
+      if (e.altKey && e.key === "s") {
+        console.log("yes");
+        state.showStack = !state.showStack;
       }
     });
 

@@ -41,6 +41,7 @@
               </svg>
             </div>
           </div>
+          <div class="maxsize">Max 50KB</div>
         </div>
         <form @submit.prevent="handleSubmit" class="infoSect">
           <input
@@ -196,6 +197,9 @@ export default {
     const handleFileChange = (e) => {
       if (!e.target.files) return;
       if (!/(\.jpeg|\.png|\.jpg)$/i.exec(e.target.value)) return;
+      if (e.target.files[0].size / 1024 > 70) {
+        return console.log("File Size Exceeds");
+      }
 
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -238,10 +242,10 @@ export default {
   justify-content: flex-end;
   align-items: flex-start;
   color: white;
+  position: relative;
 }
 .photo {
   cursor: pointer;
-  margin-right: 2rem;
   width: 220px;
   height: 235px;
   display: flex;
@@ -258,6 +262,15 @@ export default {
 
   position: relative;
   overflow: hidden;
+}
+.maxsize {
+  font-family: "Poppinsm";
+  position: absolute;
+  font-size: 13px;
+  padding: 10px;
+  background: #0aef4a;
+  border-radius: 0 18px 0 10px;
+  width: 85px;
 }
 img {
   position: absolute;

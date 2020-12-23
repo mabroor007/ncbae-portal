@@ -13,9 +13,11 @@
     </div>
     <div class="detailPart">
       <p class="name">
-        {{ $props.student.student_name }} S/o {{ $props.student.father_name }}
+        {{ $props.student.student_name }} | {{ $props.student.roll_no }}
       </p>
-      <p class="course">{{ $props.student.course_name }}</p>
+      <p class="course">
+        {{ $props.student.course_name }} | {{ $props.student.course_code }}
+      </p>
     </div>
   </div>
 </template>

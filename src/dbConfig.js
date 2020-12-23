@@ -15,8 +15,6 @@ const dbOptions = {
   },
 };
 
-sql = postgres({
-  ...dbOptions,
-});
+sql = postgres({ ...dbOptions });
 
 module.exports = sql;

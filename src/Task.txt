@@ -21,7 +21,12 @@ import { useRouter } from "vue-router";
 
         @blur="$emit('query-data', null)"
 
-
+259kb --- 86kb
+35kb --- 13kb
+237kb --- 89kb
+// sql = postgres(
+//   "postgres://obxgqrns:FibJN71NK3Bt4sA13kdZ47HTo_N1qMS3@dumbo.db.elephantsql.com:5432/obxgqrns"
+// );
 INSERT INTO students(
     roll_no,
     student_name,

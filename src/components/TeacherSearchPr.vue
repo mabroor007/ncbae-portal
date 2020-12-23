@@ -15,7 +15,9 @@
       <p class="name">
         {{ $props.teacher.teacher_name }}
       </p>
-      <p class="qual">{{ $props.teacher.course_code }}</p>
+      <p class="qual">
+        {{ $props.teacher.course_code }} | {{ $props.teacher.qualification }}
+      </p>
     </div>
   </div>
 </template>

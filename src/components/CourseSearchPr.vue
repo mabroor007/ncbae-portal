@@ -15,7 +15,11 @@
       <p class="name">
         {{ $props.course.course_name }}
       </p>
-      <p class="code">{{ $props.course.course_code }}</p>
+      <p class="code">
+        {{ $props.course.course_code }} | {{ $props.course.start_yr }}-{{
+          $props.course.end_yr
+        }}
+      </p>
     </div>
   </div>
 </template>
