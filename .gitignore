@@ -6,7 +6,7 @@ node_modules
 # local env files
 .env.local
 .env.*.local
-src/Task.txt
+/src/Task.txt
 
 # Log files
 npm-debug.log*
